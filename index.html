@@ -11,30 +11,39 @@
     <!-- font awsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- javascript -->
-    <script defer src="js/script.js"></script>
-
     <!-- vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- javascript -->
+    <script defer src="js/data.js"></script>
+    <script defer src="js/script.js"></script>
 
     <title>Document</title>
 </head>
 <body>
     <div class="container" id="root">
         <div id="carousel">
-            <!-- <i id="prev" class="fa-solid fa-arrow-left"></i> -->
+
+            <!-- freccia prev -->
+            <i id="prev" class="fa-solid fa-arrow-left" @click="goTo('prev')"></i>
+
             <div class="gallery">
-                <img :src="data.image" alt="">
-                <figcaption>
-                    <h3>${data[i].title}</h3>
-                    <p>${data[i].text}</p>
-                </figcaption>
+                <figure v-for="(pic, i) in pictures" :class="i === currentIndex ? 'active' : ''">
+                    <img :src="pic.image" alt="pic.title">
+                    <figcaption>
+                        <h3>{{ pic.title }}</h3>
+                        <p>{{ pic.text }}</p>
+                    </figcaption>
+                </figure>
             </div>
-            <!-- <i id="next" class="fa-solid fa-arrow-right"></i> -->
+
+            <!-- freccia next -->
+            <i id="next" class="fa-solid fa-arrow-right" @click="goTo('next')"></i>
+
         </div>
         <div id="thumb">
-            <!-- <img src="${data[i].image}" alt="${data[i].title}"> -->
-        </div>
+            <img v-for="(pic, i) in pictures" :src="pic.image" :alt="pic.title" :class="i === currentIndex ? 'active' : ''">
+       </div>
     </div>
 </body>
 </html>
